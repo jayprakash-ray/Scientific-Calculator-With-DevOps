@@ -37,6 +37,10 @@ export class AppComponent {
       return;
     }
   }
+  log() {
+    this.operand1 = Math.log(this.operand1);
+    this.performed = true;
+  }
   sqroot() {
     this.operand1 = Math.sqrt(this.operand1);
     this.performed = true;
