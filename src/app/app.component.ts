@@ -7,11 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ScienticCalculatorWithDevOps';
+  value :String =""
   operand1: number = 0;
   operand2: number = 0;
   operator: String = "";
   expOprn: boolean = false;
   performed: boolean = false;
+  first: boolean = false;
   sdisplay:String='';
 
   fact(n: number): any {
@@ -30,13 +32,29 @@ export class AppComponent {
     this.operand1 = this.fact(this.operand1);
     this.performed = true;
   }
-   keyPress(x: number) {
-    if(this.performed){
-      this.operand1 = x;
-      this.performed = false;
-      return;
-    }
+  cancel() {
+    this.operand1 = 0;
+    this.operand2 = 0;
+    this.sdisplay="";
   }
+   keyPress(x: number) {
+   
+      if(this.performed){
+        this.operand1 = x;
+        this.performed = false;
+        return;
+      }
+      if (this.expOprn && this.first) {
+        this.first = false;
+        this.operand1 = 0;
+      }
+      this.operand1 = (this.operand1 * 10) + x;''
+  
+      // logger.info("Add called.")
+  
+  
+    }
+
   log() {
     this.operand1 = Math.log(this.operand1);
     this.performed = true;
@@ -46,18 +64,22 @@ export class AppComponent {
     this.performed = true;
   }
   power() {
-    this.operand2= this.operand1
+    this.operand2 = this.operand1
     this.expOprn = true;
+    this.first = true;
+
   }
   calculate() {
     if (this.expOprn) {
       this.operand1 = Math.pow(this.operand2, this.operand1);
+      this.value = this.operand1.toString();
     } else {
       this.operand1 = 0;
+      this.value = this.operand1.toString();
     }
     this.expOprn = false;
     this.performed = true;
-    this.sdisplay="";
+
   }
 
 }
