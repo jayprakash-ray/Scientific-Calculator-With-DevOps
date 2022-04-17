@@ -44,23 +44,23 @@
   }
   
   .ckey {
-    color: red;
-    background: black;
+    color: rgb(252, 245, 245);
+    background: rgb(132, 7, 7);
   }
   
   .equalkey {
     color: white;
-    background-color: orangered; 
+    background-color: rgb(0, 255, 60); 
   }
   
   .numkey {
     color: skyblue;
-    background-color: grey; 
+    background-color: rgb(43, 33, 33); 
   }
   
   .opkey {
     color: white;
-    background-color: black; 
+    background-color: rgb(132, 7, 7); 
   }
   
   .main:hover{
