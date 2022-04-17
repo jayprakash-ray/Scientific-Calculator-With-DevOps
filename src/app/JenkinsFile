@@ -1,0 +1,92 @@
+pipeline 
+{
+    environment
+    {
+        registry = "jpray/scientificcalcdevops"
+        registryCredential = 'docker-cred'
+        dockerImage = ''
+    }
+    agent any
+    stages
+    {
+        stage('GIT PULL')
+        {
+          steps
+          {
+            // Get some code from a GitHub repository
+            git url: 'https://github.com/jayprakash-ray/Scientific-Calculator-With-DevOps.git', branch: 'main',
+            credentialsId: 'git_cred'
+          }
+        
+       }
+      stage('DEPENDENCY INSTALLATION')
+      {
+          steps
+          {
+                sh 'npm install'
+                echo "Modules Installed"
+          }
+     }
+     stage('BUILD')
+     {
+          steps
+          {
+            sh 'npm run build'
+            echo "Build completed"
+          }
+    }
+     stage('RUNING UNIT TEST')
+     {
+          steps
+        {
+             sh 'ng test --sourceMap=false --browsers=ChromeHeadless --watch=false --progress=false'
+            echo "Test completed"
+         }
+    }
+   
+    
+    stage('DOCKER IMAGE BUILD')
+    {
+         steps
+          {
+                sh 'docker build . -t jpray/scientificcalcdevops:latest'
+          }
+    }
+    stage('PUSH IMAGE TO DOCKERHUB')
+    {
+        steps{
+                withCredentials([string(credentialsId: 'dockerhub-cred', variable: 'dockerHubPassword')])
+                {
+                    sh "docker login -u jpray -p ${dockerHubPassword}"
+                }
+                sh 'docker push jpray/scientificcalcdevops:latest'
+            }
+    }
+     stage('REMOVING PREVIOUS BUILD IMAGES')
+    {
+        steps  
+        {
+                sh "docker rmi $registry:latest"
+                echo "Previous Build Removed!"
+        }
+    }
+     stage('ANSIBLE DEPLOYMENT')
+     {
+      steps
+      {
+         ansiblePlaybook disableHostKeyChecking: true,  installation: 'ansible', inventory: 'inventory', playbook: 'deploy_container.yml'
+      }
+
+    }
+    
+}
+post
+    {
+        always
+        {
+           sh 'docker logout'
+        }
+    }
+    
+}
+
