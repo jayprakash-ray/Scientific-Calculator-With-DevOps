@@ -79,7 +79,7 @@ export class AppComponent {
     }
     this.expOprn = false;
     this.performed = true;
-
+    this.sdisplay="";
   }
 
 }
