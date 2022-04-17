@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ScienticCalculatorWithDevOps": {
+    "Scientific-Calculator-with-DevOps": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -27,7 +27,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": []
           },
@@ -68,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "ScientificCalculatorWithDevOps:build:production"
+              "browserTarget": "Scientific-Calculator-with-DevOps:build:production"
             },
             "development": {
-              "browserTarget": "ScientificCalculatorWithDevOps:build:development"
+              "browserTarget": "Scientific-Calculator-with-DevOps:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "ScientificCalculatorWithDevOps:build"
+            "browserTarget": "Scientific-Calculator-with-DevOps:build"
           }
         },
         "test": {
@@ -102,5 +103,5 @@
       }
     }
   },
-  "defaultProject": "ScientificCalculatorWithDevOps"
+  "defaultProject": "Scientific-Calculator-with-DevOps"
 }
