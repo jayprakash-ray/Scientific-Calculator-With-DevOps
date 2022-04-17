@@ -45,7 +45,20 @@ export class AppComponent {
     this.operand1 = Math.sqrt(this.operand1);
     this.performed = true;
   }
-
+  power() {
+    this.operand2= this.operand1
+    this.expOprn = true;
+  }
+  calculate() {
+    if (this.expOprn) {
+      this.operand1 = Math.pow(this.operand2, this.operand1);
+    } else {
+      this.operand1 = 0;
+    }
+    this.expOprn = false;
+    this.performed = true;
+    this.sdisplay="";
+  }
 
 }
 

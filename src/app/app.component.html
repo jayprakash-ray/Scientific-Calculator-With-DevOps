@@ -48,11 +48,11 @@
               <td class="keys numkey" (click)="keyPress(3)">3</td>
               <td class="keys numkey" (click)="keyPress(2)">2</td>
               <td class="keys numkey" (click)="keyPress(1)">1</td>
-              <td class="keys opkey"  >^</td>
+              <td class="keys opkey" (click)="power()">^</td>
             </tr>
             <tr>
               <td colspan="3" class="keys numkey" (click)="keyPress(0)">0</td>
-              <td class="keys equalkey" >=</td>
+              <td class="keys equalkey" (click)="calculate()" >=</td>
             </tr>
           </table>
         </div>
