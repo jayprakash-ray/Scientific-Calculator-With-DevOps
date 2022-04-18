@@ -1,12 +1,20 @@
 import { Component } from '@angular/core';
+import { TOKEN_LOGGER_CONFIG } from 'ngx-logger';
+import { LoggerService } from './_services/logger.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [
+		{ provide: LoggerService, useValue: { info: (msg: string) => undefined}}
+	]
 })
 export class AppComponent {
-  title = 'ScienticCalculatorWithDevOps';
+
+  constructor(private loggerService: LoggerService) {}
+
+  title = 'ScientificCalculatorWithDevOps';
   value :String =""
   operand1: number = 0;
   operand2: number = 0;
@@ -31,11 +39,15 @@ export class AppComponent {
       }
     this.operand1 = this.fact(this.operand1);
     this.performed = true;
+
+    this.loggerService.info("factorial() function called");
   }
   cancel() {
     this.operand1 = 0;
     this.operand2 = 0;
     this.sdisplay="";
+
+    this.loggerService.info("Cancel");
   }
    keyPress(x: number) {
    
@@ -58,16 +70,23 @@ export class AppComponent {
   log() {
     this.operand1 = Math.log(this.operand1);
     this.performed = true;
+
+    this.loggerService.info("log() function called");
+
   }
   sqroot() {
     this.operand1 = Math.sqrt(this.operand1);
     this.performed = true;
+
+    this.loggerService.info("sqroot() function called");
+
   }
   power() {
     this.operand2 = this.operand1
     this.expOprn = true;
     this.first = true;
 
+    this.loggerService.info("power() function called");
   }
   calculate() {
     if (this.expOprn) {
@@ -80,6 +99,9 @@ export class AppComponent {
     this.expOprn = false;
     this.performed = true;
     this.sdisplay="";
+
+    this.loggerService.info("Calculate");
+
   }
 
 }

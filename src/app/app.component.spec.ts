@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { LoggerModule } from 'ngx-logger';
+import { LoggerService } from './_services/logger.service';
 import { AppComponent } from './app.component';
 
 describe('Calculator Unit Tests', () => {
@@ -26,10 +27,10 @@ describe('Calculator Unit Tests', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'ScienticCalculatorWithDevOps'`, () => {
+  it(`should have as title 'ScientificCalculatorWithDevOps'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('ScienticCalculatorWithDevOps');
+    expect(app.title).toEqual('ScientificCalculatorWithDevOps');
   });
   
   it("Testing input as  1", () => {
